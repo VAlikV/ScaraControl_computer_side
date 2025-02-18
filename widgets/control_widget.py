@@ -16,6 +16,7 @@ class ControlWidget(QWidget):
 
         self.file_label = QLabel("File: ",self)
         self.file_edit = QLineEdit(self)
+        self.file_edit.setPlaceholderText("file.txt")
         self.file_button = QPushButton("Send")
 
         self.control_layout.addWidget(self.file_label,0,0)
@@ -26,6 +27,7 @@ class ControlWidget(QWidget):
         
         self.point_label = QLabel("Point: ",self)
         self.point_edit = QLineEdit(self)
+        self.point_edit.setPlaceholderText("aa bb cc")
         self.point_button = QPushButton("Send")
 
         self.control_layout.addWidget(self.point_label,1,0)
