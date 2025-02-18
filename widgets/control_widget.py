@@ -1,20 +1,23 @@
 from PyQt5.QtWidgets import QWidget, QGridLayout, QHBoxLayout, QLabel, QLineEdit, QPushButton
+from PyQt5.QtCore import pyqtSignal, pyqtSlot, QByteArray
 
 class ControlWidget(QWidget):
+
+    point_sended = pyqtSignal(str)
+
     def __init__(self):
         super().__init__()
         
         self.layout = QHBoxLayout()
         self.control_layout = QGridLayout()
-        # self.file_layout = QHBoxLayout()
-        # self.point_layout = QHBoxLayout()
         self.button_layout = QHBoxLayout()
 
         # =======================================================
 
         self.file_label = QLabel("File: ",self)
         self.file_edit = QLineEdit(self)
-        self.file_button = QPushButton("Sent")
+        self.file_button = QPushButton("Send")
+
         self.control_layout.addWidget(self.file_label,0,0)
         self.control_layout.addWidget(self.file_edit,0,1)
         self.control_layout.addWidget(self.file_button,0,2)
@@ -23,7 +26,8 @@ class ControlWidget(QWidget):
         
         self.point_label = QLabel("Point: ",self)
         self.point_edit = QLineEdit(self)
-        self.point_button = QPushButton("Sent")
+        self.point_button = QPushButton("Send")
+
         self.control_layout.addWidget(self.point_label,1,0)
         self.control_layout.addWidget(self.point_edit,1,1)
         self.control_layout.addWidget(self.point_button,1,2)
@@ -31,13 +35,13 @@ class ControlWidget(QWidget):
         # =======================================================
 
         self.start_button = QPushButton("START", self)
-        # self.refresh_button.clicked.connect(self.print_text)
+        self.start_button.setFixedSize(100, 80)
         self.button_layout.addWidget(self.start_button)
 
         # =======================================================
 
         self.stop_button = QPushButton("STOP", self)
-        # self.refresh_button.clicked.connect(self.print_text)
+        self.stop_button.setFixedSize(100, 80)
         self.button_layout.addWidget(self.stop_button)
 
         # =======================================================
@@ -49,6 +53,43 @@ class ControlWidget(QWidget):
         # =======================================================
         
         self.setLayout(self.layout)
-    
-    def print_text(self):
+
+        self.closePort()
+
+        self.setConnection()
+
+# -------------------------------------------------------------------------
+
+    def setConnection(self):
+        self.point_button.clicked.connect(self.sendPoint)
+
+# -------------------------------------------------------------------------
+
+    @pyqtSlot()
+    def sendFile(self):
         print(self.input_field.text())
+
+# -------------------------------------------------------------------------
+
+    @pyqtSlot()
+    def sendPoint(self):
+        point = self.point_edit.text()
+        self.point_sended.emit(point)
+
+# -------------------------------------------------------------------------
+
+    @pyqtSlot()
+    def openPort(self):
+        self.start_button.setEnabled(True)
+        self.stop_button.setEnabled(True)
+        self.file_button.setEnabled(True)
+        self.point_button.setEnabled(True)
+
+# -------------------------------------------------------------------------
+
+    @pyqtSlot()
+    def closePort(self):
+        self.start_button.setEnabled(False)
+        self.stop_button.setEnabled(False)
+        self.file_button.setEnabled(False)
+        self.point_button.setEnabled(False)
