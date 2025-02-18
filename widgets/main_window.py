@@ -31,6 +31,6 @@ class MainWindow(QWidget):
     def setConnectoins(self):
         self.serial.port_opened.connect(self.control.openPort)
         self.serial.port_closed.connect(self.control.closePort)
-        self.control.point_sended.connect(self.serial.send)
+        self.control.point_send.connect(self.serial.send)
 
         

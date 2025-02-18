@@ -18,15 +18,12 @@ class SerialWidget(QWidget):
         # =======================================================
         
         self.refresh_button = QPushButton("Refresh", self)
-        # self.refresh_button.clicked.connect(self.print_text)
         self.layout.addWidget(self.refresh_button)
 
         self.connect_button = QPushButton("Connect", self)
-        # self.refresh_button.clicked.connect(self.print_text)
         self.layout.addWidget(self.connect_button)
 
         self.disconnect_button = QPushButton("Disconnect", self)
-        # self.refresh_button.clicked.connect(self.print_text)
         self.layout.addWidget(self.disconnect_button)
         
         self.setLayout(self.layout)

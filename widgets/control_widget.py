@@ -3,7 +3,7 @@ from PyQt5.QtCore import pyqtSignal, pyqtSlot, QByteArray
 
 class ControlWidget(QWidget):
 
-    point_sended = pyqtSignal(str)
+    point_send = pyqtSignal(str)
 
     def __init__(self):
         super().__init__()
@@ -67,14 +67,22 @@ class ControlWidget(QWidget):
 
     @pyqtSlot()
     def sendFile(self):
-        print(self.input_field.text())
+        file = open(self.file_edit.text(), 'r')
+        self.point_send.emit("begin")
+        for point in file:
+            # print(line)
+            self.point_send.emit(point)
+        self.point_send.emit("end")
+        file.close()
 
 # -------------------------------------------------------------------------
 
     @pyqtSlot()
     def sendPoint(self):
         point = self.point_edit.text()
-        self.point_sended.emit(point)
+        self.point_send.emit("begin")
+        self.point_send.emit(point)
+        self.point_send.emit("end")
 
 # -------------------------------------------------------------------------
 
