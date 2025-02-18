@@ -8,3 +8,5 @@ if __name__ == "__main__":
     window.show()
     window.setFixedSize(600,150)
     sys.exit(app.exec_())
+
+# Сделать масштабирование по разрешению экрана
