@@ -1,30 +1,45 @@
 # ScaraControl_computer_side
 Program for control scara manipulator for WBS
 
-## For windows
+## Launch environment
 
-Creating enviroment
+### Creating environment folder:
 ```bash
 python -m venv .venv
 ```
 
-Activation
+### Environment activation:
+
+For Windows:
 
 ```bash
-Set-ExecutionPolicy Unrestricted -Scope Process
-
 .venv\Scripts\Activate.ps1
 ```
 
-Deactivation
+For Linux:
+
+```bash
+source .venv/bin/activate
+```
+
+### If error occurs during activation:
+```bash
+Set-ExecutionPolicy Unrestricted -Scope Process
+```
+
+### Deactivation:
 ```bash
 deactivate
 ```
-Install req
+
+### Installing requirements
+```bash
+python -m pip install -r requirements.txt
+```
+
+### Creating a file requirements.txt
 ```bash
 python -m pip freeze > requirements.txt
-
-python -m pip install -r requirements.txt
 ```
 
 ## For Linux
