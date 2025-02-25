@@ -64,6 +64,22 @@ class ControlWidget(QWidget):
 
     def setConnection(self):
         self.point_button.clicked.connect(self.sendPoint)
+        self.file_button.clicked.connect(self.sendFile)
+        self.start_button.clicked.connect(self.sendStart)
+        self.stop_button.clicked.connect(self.sendStop)
+
+# -------------------------------------------------------------------------
+
+    @pyqtSlot()
+    def sendStart(self):
+        self.point_send.emit("START")
+
+# -------------------------------------------------------------------------
+
+    @pyqtSlot()
+    def sendStop(self):
+        self.point_send.emit("STOP")
+
 
 # -------------------------------------------------------------------------
 
